@@ -1,0 +1,57 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14760\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 *Note: I don\'92t have any web server to host the web system. So I skip the 4th requirement.\
+\
+=> First, install the necessary libraries:\
+	\
+	pip or pip3 install cv2, numpy, sys\
+\
+=> To run this code from the command line, you need to parse the below argument:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf2 \CocoaLigature0 \
+	$ pythond or python3 per_reid.py v1.mp4 v2.mp4 models\
+\
+	per_reid.py: Main code\
+	v1.mp4: First video path\
+	v2.mp4: Second video path\
+	models: pre-trained model path, which I downloaded from OpenCVINO
+\f0\fs24 \cf0 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+=> This code should work as follows:\
+\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}Parse the command line arguments for the paths to the two input videos and the models.\
+{\listtext	2.	}Create an instance of the IECore class.\
+{\listtext	3.	}Create an instance of the ParsonDetector class and pass the IECore instance, the path to the person detection model, and the threshold as arguments.\
+{\listtext	4.	}Create an instance of the ParsonReidentification class and pass the IECore instance and the path to the person re-identification model as arguments.\
+{\listtext	5.	}Create an instance of the Tracker class.\
+{\listtext	6.	}Open the two input videos using the cv2.VideoCapture function.\
+{\listtext	7.	}Get the width and height of the frames in the input videos and set the frame rate.\
+{\listtext	8.	}Create a `cv2.VideoWriter` object to write the output video.\
+{\listtext	9.	}Read the current frame from each input video in a while loop.\
+{\listtext	10.	}Detect persons in the current frame of each input video. \
+{\listtext	11.	}Update the ID information DB using the detections from both input videos.\
+{\listtext	12.	}Iterate over the persons in the ID information DB.\
+{\listtext	13.	}For each person, draw a bounding box around the person and extract the ROI.\
+{\listtext	14.	}Perform person re-identification on the ROI using the `ParsonReidentification` model.\
+{\listtext	15.	}Display the ID of the person on the concatenated frame.\
+{\listtext	16.	}Write the concatenated frame to the output video using the `cv2.VideoWriter` object.\
+{\listtext	17.	}Repeat the above steps until one of the input videos has reached the end.\
+{\listtext	18.	}Release the `cv2.VideoCapture` and `cv2.VideoWriter` objects.\
+{\listtext	19.	}Destroy all windows.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+=>I hope this helps! Let me know if you have any further questions.\
+\
+=> Difficulties:\
+IEPlugs, readNet, IENetwork, and some other libraries were not working in OpenCV\'92s latest version(4.6)\
+}
